@@ -4,22 +4,31 @@ Plugin Name: Simple Event
 Plugin URI: https://github.com/Panchesco/panchco-simple-event
 Description: Adds an event date time
 Author: Richard Whitmer
-Version: 1.0.0
+Version: 1.1.0
 */
- 
+
+
  function panchco_simple_event_metabox() {
+  
+    $post_types = get_option('panchco_simple_event_post_types');
+    
+    if( $post_types && ! empty($post_types)) {
     add_meta_box( 
         'panchco_simple_event_metabox', 
         __( 'Event Info', 'panchco'), 
         'panchco_simple_event_metabox_callback', 
-        array('post'), 
+        $post_types, 
         'side', 
         'low'
-    );
+        );
+    }
 }
 
 add_action( 'add_meta_boxes', 'panchco_simple_event_metabox' );
 
+/**
+ * Display the metabox.
+ */
 function panchco_simple_event_metabox_callback( $post ) { ?>
      
     <form action="" method="post">
@@ -43,7 +52,8 @@ function panchco_simple_event_metabox_callback( $post ) { ?>
      
 <?php }
   
-  
+//-----------------------------------------------------------------------------
+
 function panchco_save_simple_event_meta( $post_id ) {
   
   global $post;
@@ -116,6 +126,80 @@ function panchco_load_datetimepicker() {
 }
 
 add_action( 'admin_enqueue_scripts', 'panchco_load_datetimepicker' );
+
+//-----------------------------------------------------------------------------
+
+// Options.
+
+function panchco_simple_event_register_settings() {
+   add_option( 'panchco_simple_event_post_types', array());
+   register_setting( 'panchco_simple_event_options_group', 'panchco_simple_event_post_types' );
+}
+
+add_action( 'admin_init', 'panchco_simple_event_register_settings' );
+
+//-----------------------------------------------------------------------------
+
+/**
+ * Register plugin options page.
+ */
+function panchco_simple_event_register_options_page() {
+  add_options_page('Simple Event Options', 'Simple Event', 'manage_options', 'panchco_simple_event', 'panchco_simple_event_options_page');
+  }
+ 
+/**
+ * Display plugin options settings page.
+ */  
+function panchco_simple_event_options_page() {
+  
+  // Get the currently registered post types.
+
+  $args = array('public' => true,
+                'capability_type' => 'post');
+  
+  $site_post_types = get_post_types($args);
+  
+  if( isset($site_post_types['attachment']) ) {
+    unset($site_post_types['attachment']);
+  }
+  
+  $post_types = get_option('panchco_simple_event_post_types');
+  
+  if( ! $post_types || !is_array($post_types)) {
+    $post_types = array();
+  }
+  
+//-----------------------------------------------------------------------------
+  
+  /**
+   * Display the form.
+   */
+  ?>
+  <div class="wrap">
+  <h2>Simple Event Options</h2>
+  <form method="post" action="options.php">
+  <?php settings_fields( 'panchco_simple_event_options_group' ); ?>
+  <table class="form-table">
+  <tr valign="top">
+  <th scope="row"><label for="panchco_simple_event_post_types">Post Types</label><p>On which post types do you want the Simple Event date options to appear?</p></th>
+  <td>
+  <?php foreach($site_post_types as $key => $type ) { ?>
+    <input type="checkbox" name="panchco_simple_event_post_types[]" value="<?php echo $key ?>"<?php if(in_array($key,$post_types)) { ?> checked="checked"<?php } ?>/> <?php echo $type;?><br>
+  <?php } ?>
+  </td>
+  </tr>
+  </table>
+  <?php  submit_button(); ?>
+  </form>
+  </div>
+<?php
+
+}
+
+add_action('admin_menu', 'panchco_simple_event_register_options_page');
+
+//-----------------------------------------------------------------------------
+
 
 
 
