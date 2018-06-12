@@ -26,6 +26,8 @@ Version: 1.1.0
 
 add_action( 'add_meta_boxes', 'panchco_simple_event_metabox' );
 
+//-----------------------------------------------------------------------------
+
 /**
  * Display the metabox.
  */
