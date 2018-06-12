@@ -206,21 +206,207 @@ add_action('admin_menu', 'panchco_simple_event_register_options_page');
  * Template functions.
  */
  
- if( ! function_exists('simple_event_date') ){
+ if( ! function_exists('se_event_start') ){
    
-   function simple_start_date($post_id, $format='l, F j, Y') {
+   /**
+    * Echo event start datetime.
+    * @param $post_id int post ID
+    * @param $format string PHP date format string.
+    * @return mixed
+    */
+   function se_event_start($post_id, $format='l, F j, Y') {
      
-      $event_date = get_post_meta($post_id,'panchco_event_date', true);
+      $val = get_post_meta($post_id,'panchco_event_date', true);
       
-      if( $event_date ) {
-        echo  date($format,strtotime($event_date));
+      if( $val ) {
+        echo date($format,strtotime($val));
       }
       
       return; 
    }
    
  }
-
+ 
+ //-----------------------------------------------------------------------------
+ 
+  if( ! function_exists('se_event_end') ){
+   
+  /**
+    * Echo event end datetime.
+    * @param $post_id int post ID
+    * @param $format string PHP date format string.
+    * @return mixed
+    */
+   function se_event_end($post_id, $format='l, F j, Y') {
+     
+      $val = get_post_meta($post_id,'panchco_end_date', true);
+      
+      if( $val ) {
+        echo date($format,strtotime($val));
+      }
+      
+      return; 
+   }
+   
+ }
+ 
+ //-----------------------------------------------------------------------------
+ 
+  if( ! function_exists('se_event_archive') ){
+   
+  /**
+    * Echo event archive datetime.
+    * @param $post_id int post ID
+    * @param $format string PHP date format string.
+    * @return mixed
+    */
+   function se_event_archive($post_id, $format='l, F j, Y') {
+     
+      $val = get_post_meta($post_id,'panchco_archive_date', true);
+      
+      if( $val ) {
+        echo date($format,strtotime($val)); 
+      }
+      
+      return; 
+   }
+   
+ }
+ 
+ //-----------------------------------------------------------------------------
+ 
+   if( ! function_exists('se_all_day') ){
+   
+   /**
+    * Echo event all day event value.
+    * @param $post_id int post ID
+    * @return string
+    */
+   function se_all_day($post_id) {
+     
+      $val = get_post_meta($post_id,'panchco_all_day', true);
+      
+      if( $val == 'y' ) {
+        echo __("Yes"); 
+        return;
+      }
+      
+      echo __("No"); 
+      return;
+   }
+   
+ }
+ 
+ //-----------------------------------------------------------------------------
+ 
+  if( ! function_exists('get_se_event_start') ){
+   
+   /**
+    * Return event start datetime.
+    * @param $post_id int post ID
+    * @param $format string PHP date format string.
+    * @return mixed
+    */
+   function get_se_event_start($post_id, $format='l, F j, Y') {
+     
+      $val = get_post_meta($post_id,'panchco_event_date', true);
+      
+      if( $val ) {
+        return date($format,strtotime($val));
+      }
+      
+      return false; 
+   }
+   
+ }
+ 
+ //-----------------------------------------------------------------------------
+ 
+  if( ! function_exists('get_se_event_end') ){
+   
+   /**
+    * Return event end datetime.
+    * @param $post_id int post ID
+    * @param $format string PHP date format string.
+    * @return mixed
+    */
+   function get_se_event_end($post_id, $format='l, F j, Y') {
+     
+      $val = get_post_meta($post_id,'panchco_end_date', true);
+      
+      if( $val ) {
+        return date($format,strtotime($val));
+      }
+      
+      return false; 
+   }
+   
+ }
+ 
+ //-----------------------------------------------------------------------------
+ 
+  if( ! function_exists('get_se_event_archive') ){
+   
+   /**
+    * Return event archive datetime.
+    * @param $post_id int post ID
+    * @param $format string PHP date format string.
+    * @return mixed
+    */
+   function get_se_event_archive($post_id, $format='l, F j, Y') {
+     
+      $val = get_post_meta($post_id,'panchco_archive_date', true);
+      
+      if( $val ) {
+        return date($format,strtotime($val)); 
+      }
+      
+      return false; 
+   }
+   
+ }
+ 
+ //-----------------------------------------------------------------------------
+ 
+   if( ! function_exists('get_se_all_day') ){
+   
+  /**
+    * Return event all day value.
+    * @param $post_id int post ID
+    * @return string
+    */
+   function get_se_all_day($post_id) {
+     
+      $val = get_post_meta($post_id,'panchco_all_day', true);
+      
+      if( $val == 'y' ) {
+        return __("Yes"); 
+      }
+      
+      return __("No"); 
+   }
+   
+ }
+ 
+ //-----------------------------------------------------------------------------
+ 
+ 
+  if( ! function_exists('se_events') ){
+   
+  /**
+    * Return event all day value.
+    * @param $post_type string
+    * @return $obj
+    */
+   function se_events($post_type) {
+     
+     echo $post_type;
+          
+   }
+   
+ }
+ 
+ //-----------------------------------------------------------------------------
 
 
 
