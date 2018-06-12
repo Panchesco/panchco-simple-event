@@ -202,6 +202,25 @@ add_action('admin_menu', 'panchco_simple_event_register_options_page');
 
 //-----------------------------------------------------------------------------
 
+/** 
+ * Template functions.
+ */
+ 
+ if( ! function_exists('simple_event_date') ){
+   
+   function simple_start_date($post_id, $format='l, F j, Y') {
+     
+      $event_date = get_post_meta($post_id,'panchco_event_date', true);
+      
+      if( $event_date ) {
+        echo  date($format,strtotime($event_date));
+      }
+      
+      return; 
+   }
+   
+ }
+
 
 
 
