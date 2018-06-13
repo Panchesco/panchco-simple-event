@@ -58,7 +58,6 @@ Displays Yes or No if an event is All Day
 | --- | --- | --- | --- | --- |
 | ```$post_id``` | Yes |	Post ID | None |  |
 
-## Template Functions
 
 ### ```get_se_event_start($post_id, $format)```
 
@@ -104,3 +103,52 @@ Returns Yes or No if the event is All day or not.
 | Parameter | Required? |	Description | Default | Options |
 | --- | --- | --- | --- | --- |
 | ```$post_id``` | Yes |	Post ID | None |  |
+
+
+### ```se_posts($config)```
+
+Returns the results of a WP_Query() instance queried against saved Simple Event date & time values.
+
+In addition to parameters available in the [WP_Query()](https://codex.wordpress.org/Class_Reference/WP_Query#Parameters), the following parameters are available:
+
+| Argument array element | Required? |	Description | Default | Options |
+| --- | --- | --- | --- | --- |
+| ```post_type``` | Yes |	post_type slug | None |  |
+| ```orderby``` | No |	Post element to orderby | start_date | start_date, end_date, archive_date, title |
+| ```order``` | No |	Order results in ascending or descending order | DESC | ASC, DESC |
+| ```all_day``` | No |	Include all day events in results? | Yes | Yes, No, Only |
+| ```show_archived``` | No |	Include events whose archive date has passed in results? | Yes | Yes, No |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

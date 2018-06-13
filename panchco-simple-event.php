@@ -411,6 +411,7 @@ add_action('admin_menu', 'panchco_simple_event_register_options_page');
         return;
       } else {
         $args['post_type'] = $config['post_type'];
+        unset($config['post_type']);
       }
       
       //  Orderby.
@@ -436,8 +437,18 @@ add_action('admin_menu', 'panchco_simple_event_register_options_page');
         $args['orderby'] = $config['orderby'];
       }
       
+      // Unset config[orderby] now.
+      if( isset($config['orderby']) ) {
+        unset($config['orderby']);
+      }
+      
+      
       // Order.
       $args['order'] = $config['order'];
+      
+      if( isset($config['order']) ) {
+        unset($config['order']);
+      }
       
       // Query on All Day? 
       if( isset( $config['all_day']) && $config['all_day'] !== false) {
@@ -450,6 +461,11 @@ add_action('admin_menu', 'panchco_simple_event_register_options_page');
                                     'compare' => '=',
                                     'type' => 'CHAR');
 
+      }
+      
+      // Unset config all day now.
+      if(isset($config['all_day'])) {
+        unset($config['all_day']);
       }
       
       // Show archived? 
@@ -475,10 +491,30 @@ add_action('admin_menu', 'panchco_simple_event_register_options_page');
 
       }
       
+      if( isset($config['show_archived']) ) {
+        unset($config['show_archived']);
+      }
+      
       // Get Posts Per Page if set.
       if( isset( $config['posts_per_page'] ) ) {
         $args['posts_per_page'] = $config['posts_per_page'];
+        unset($config['posts_per_page']);
       }
+      
+      
+      
+      $args = array_merge($config,$args);
+      
+      print_r('<pre>');
+      print_r($config);
+      print_r('</pre>');
+      
+      
+      print_r('<pre>');
+      print_r($args);
+      print_r('</pre>');
+      
+      
       
       $query = new WP_Query($args);
       
