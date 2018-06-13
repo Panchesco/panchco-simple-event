@@ -113,9 +113,9 @@ In addition to parameters available in the [WP_Query()](https://codex.wordpress.
 
 | Argument array element | Required? |	Description | Default | Options |
 | --- | --- | --- | --- | --- |
-| ```post_type``` | Yes |	post_type slug | None | (string|array) |
-| ```orderby``` | No |	Post element to orderby | (string|array) start_date | start_date, end_date, archive_date, title |
-| ```order``` | No |	Order results in ascending or descending order | (string|array) DESC | ASC, DESC |
+| ```post_type``` | Yes |	post_type slug | None | string,array |
+| ```orderby``` | No |	Post element to orderby | string,array start_date | start_date, end_date, archive_date, title |
+| ```order``` | No |	Order results in ascending or descending order | string,array DESC | ASC, DESC |
 | ```all_day``` | No |	Include all day events in results? | Yes | Yes, No, Only |
 | ```show_archived``` | No |	Include events whose archive date has passed in results? | Yes | Yes, No |
 
