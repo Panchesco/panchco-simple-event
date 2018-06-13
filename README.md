@@ -47,3 +47,60 @@ Display the event archive date & time value.
 | --- | --- | --- | --- | --- |
 | ```$post_id``` | Yes |	Post ID | None |  |
 | ```$format``` | No |	PHP date format string | l, F j, Y |  See [PHP docs for date strings](http://php.net/manual/en/function.date.php) |
+
+### ```se_all_day($post_id)```
+
+Displays Yes or No if an event is All Day 
+
+#### Parameters
+
+| Parameter | Required? |	Description | Default | Options |
+| --- | --- | --- | --- | --- |
+| ```$post_id``` | Yes |	Post ID | None |  |
+
+## Template Functions
+
+### ```get_se_event_start($post_id, $format)```
+
+Returns the event start date & time value. Returns false if no value exists.
+
+#### Parameters
+
+| Parameter | Required? |	Description | Default | Options |
+| --- | --- | --- | --- | --- |
+| ```$post_id``` | Yes |	Post ID | None |  |
+| ```$format``` | No |	PHP date format string | l, F j, Y |  See [PHP docs for date strings](http://php.net/manual/en/function.date.php) |
+
+
+### ```get_se_event_end($post_id, $format)```
+
+Returns the event end date & time value. Returns false if no value exists.
+
+#### Parameters
+
+| Parameter | Required? |	Description | Default | Options |
+| --- | --- | --- | --- | --- |
+| ```$post_id``` | Yes |	Post ID | None |  |
+| ```$format``` | No |	PHP date format string | l, F j, Y |  See [PHP docs for date strings](http://php.net/manual/en/function.date.php) |
+
+
+### ```get_se_event_archive($post_id, $format)```
+
+Returns the event end archive & time value. Returns false if no value exists.
+
+#### Parameters
+
+| Parameter | Required? |	Description | Default | Options |
+| --- | --- | --- | --- | --- |
+| ```$post_id``` | Yes |	Post ID | None |  |
+| ```$format``` | No |	PHP date format string | l, F j, Y |  See [PHP docs for date strings](http://php.net/manual/en/function.date.php) |
+
+### ```get_se_all_day($post_id)```
+
+Returns Yes or No if the event is All day or not.
+
+#### Parameters
+
+| Parameter | Required? |	Description | Default | Options |
+| --- | --- | --- | --- | --- |
+| ```$post_id``` | Yes |	Post ID | None |  |
