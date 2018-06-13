@@ -7,7 +7,6 @@ Author: Richard Whitmer
 Version: 1.2.1
 */
 
-
  function panchco_simple_event_metabox() {
   
     $post_types = get_option('panchco_simple_event_post_types');
@@ -36,18 +35,18 @@ function panchco_simple_event_metabox_callback( $post ) { ?>
     <form action="" method="post">
         <?php        
         //retrieve metadata value if it exists
-        $panchco_event_date = get_post_meta( $post->ID, 'panchco_event_date', true );
-        $panchco_end_date = get_post_meta( $post->ID, 'panchco_end_date', true );
-        $panchco_archive_date = get_post_meta( $post->ID, 'panchco_archive_date', true );
-        $panchco_all_day = get_post_meta( $post->ID, 'panchco_all_day', true );
+        $event_date = get_post_meta( $post->ID, 'panchco_event_date', true );
+        $end_date = get_post_meta( $post->ID, 'panchco_end_date', true );
+        $archive_date = get_post_meta( $post->ID, 'panchco_archive_date', true );
+        $all_day = get_post_meta( $post->ID, 'panchco_all_day', true );
         ?>
         <p><?php echo __( 'Start Date & Time', 'panchco');?><br>        
-        <input class="panchco-datetimepicker" type="text" id="panchco_event_date" name="panchco_event_date" value="<?php echo esc_attr( $panchco_event_date ); ?>" /></p>
+        <input class="panchco-datetimepicker" type="text" id="panchco_event_date" name="panchco_event_date" value="<?php echo esc_attr( $event_date ); ?>" /></p>
         <p><?php echo __( 'End Date & Time', 'panchco');?><br>       
-        <input class="panchco-datetimepicker" type="text" id="panchco_end_date" name="panchco_end_date" value="<?php echo esc_attr( $panchco_end_date ); ?>" /></p> 
-        <p><input type="checkbox" id="panchco_all_day" name="panchco_all_day" value="y" <?php if($panchco_all_day=="y"){ ?>checked="checked"<?php } ?>/><?php echo __( 'All Day', 'panchco');?></p> 
+        <input class="panchco-datetimepicker" type="text" id="panchco_end_date" name="panchco_end_date" value="<?php echo esc_attr( $end_date ); ?>" /></p> 
+        <p><input type="checkbox" id="panchco_all_day" name="panchco_all_day" value="y" <?php if($all_day=="y"){ ?>checked="checked"<?php } ?>/><?php echo __( 'All Day', 'panchco');?></p> 
         <p><?php echo __( 'Archive Date', 'panchco');?><br>      
-        <input class="panchco-datetimepicker" type="text" id="panchco_archive_date" name="panchco_archive_date" value="<?php echo esc_attr( $panchco_archive_date ); ?>" /></p>               
+        <input class="panchco-datetimepicker" type="text" id="panchco_archive_date" name="panchco_archive_date" value="<?php echo esc_attr( $archive_date ); ?>" /></p>               
         <?php  wp_nonce_field( 'panchco_simple_event_metabox_nonce', 'panchco_simple_event_nonce' ); ?>
 
     </form>
