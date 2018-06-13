@@ -108,7 +108,6 @@ Returns Yes or No if the event is All day or not.
 ### ```se_posts($config)```
 
 Returns the results of a WP_Query() instance queried against saved Simple Event date & time values.
-
 In addition to parameters available in the [WP_Query()](https://codex.wordpress.org/Class_Reference/WP_Query#Parameters), the following parameters are available:
 
 | Argument array element | Required? |	Description | Default | Options |
