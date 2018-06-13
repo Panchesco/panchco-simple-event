@@ -391,18 +391,101 @@ add_action('admin_menu', 'panchco_simple_event_register_options_page');
  //-----------------------------------------------------------------------------
  
  
-  if( ! function_exists('se_events') ){
-   
+ 
+  if( ! function_exists('se_posts') ){
+    
   /**
     * Return event all day value.
     * @param $post_type string
     * @return $obj
     */
-   function se_events($post_type) {
-     
-     echo $post_type;
+   function se_posts($config = array('post_type' => '',
+                                      'orderby' => 'start_date',
+                                      'order' => 'DESC', 
+                                      'all_day' => false,
+                                      'show_archived' => false)) {
+                       
+
+      // Post Type.
+      if( ! $config['post_type'] ) {
+        return;
+      } else {
+        $args['post_type'] = $config['post_type'];
+      }
+      
+      //  Orderby.
+      if( in_array($config['orderby'],array('start_date','end_date','archive_date'))) {
+        
+        $args['orderby'] = 'meta_value';
+        
+        switch($config['orderby']) {        
+        
+        case 'end_date':
+         $args['meta_key'] = 'panchco_end_date';
+        break;
+        
+        case 'archive_date':
+         $args['meta_key'] = 'panchco_archive_date';
+        break;
+        
+        default:
+          $args['meta_key'] = 'panchco_event_date';
+        break;
+        }
+      } else {
+        $args['orderby'] = $config['orderby'];
+      }
+      
+      // Order.
+      $args['order'] = $config['order'];
+      
+      // Query on All Day? 
+      if( isset( $config['all_day']) && $config['all_day'] !== false) {
+        
+        $all_day = strtolower($config['all_day']);
+        $all_day = substr($all_day,0,1);
+        
+        $args['meta_query'][] = array('key' => 'panchco_all_day',
+                                    'value' => $all_day,
+                                    'compare' => '=',
+                                    'type' => 'CHAR');
+
+      }
+      
+      // Show archived? 
+      if( isset( $config['show_archived']) && $config['show_archived'] !== false) {
+        
+        $sa = strtolower($config['show_archived']);
+        $sa = substr($sa,0,1);
+        
+        
+        if( $sa == 'n') {
+        
+        $args['meta_query'][] = array('key' => 'panchco_archive_date',
+                                    'value' => current_time('Y-m-d H:i'),
+                                    'compare' => '>',
+                                    'type' => 'DATE');
+        } elseif( $sa == 'o' ) {
           
+          $args['meta_query'][] = array('key' => 'panchco_archive_date',
+                                    'value' => current_time('Y-m-d H:i'),
+                                    'compare' => '<',
+                                    'type' => 'DATE');
+        }
+
+      }
+      
+      // Get Posts Per Page if set.
+      if( isset( $config['posts_per_page'] ) ) {
+        $args['posts_per_page'] = $config['posts_per_page'];
+      }
+      
+      $query = new WP_Query($args);
+      
+      return $query;
+     
    }
+   
    
  }
  
