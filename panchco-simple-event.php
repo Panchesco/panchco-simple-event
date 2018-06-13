@@ -493,12 +493,6 @@ add_action('admin_menu', 'panchco_simple_event_register_options_page');
         unset($args['show_archived']);
       }
       
-      
-      print_r('<pre>');
-      print_r($args);
-      print_r('</pre>');
-      
-      
       $query = new WP_Query($args);
       
       return $query;
