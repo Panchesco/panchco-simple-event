@@ -297,7 +297,7 @@ add_action('admin_menu', 'panchco_simple_event_register_options_page');
      
       $val = get_post_meta($post_id,'panchco_all_day', true);
       
-      if( $val == 'y' ) {
+      if( 'y' == $val ) {
         echo __("Yes"); 
         return;
       }
@@ -390,7 +390,7 @@ add_action('admin_menu', 'panchco_simple_event_register_options_page');
      
       $val = get_post_meta($post_id,'panchco_all_day', true);
       
-      if( $val == 'y' ) {
+      if( 'y' == $val ) {
         return __("Yes"); 
       }
       
@@ -512,21 +512,10 @@ add_action('admin_menu', 'panchco_simple_event_register_options_page');
         unset($config['posts_per_page']);
       }
       
-      
-      
+
       $args = array_merge($config,$args);
       
-      print_r('<pre>');
-      print_r($config);
-      print_r('</pre>');
-      
-      
-      print_r('<pre>');
-      print_r($args);
-      print_r('</pre>');
-      
-      
-      
+
       $query = new WP_Query($args);
       
       return $query;
