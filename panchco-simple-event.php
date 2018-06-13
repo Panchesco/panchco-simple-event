@@ -155,6 +155,8 @@ function panchco_simple_event_register_options_page() {
 function panchco_simple_event_options_page() {
   
   // Get the currently registered post types.
+  
+  $data = array();
 
   $args = array('public' => true,
                 'capability_type' => 'post');
@@ -165,12 +167,21 @@ function panchco_simple_event_options_page() {
     unset($site_post_types['attachment']);
   }
   
-  $post_types = get_option('panchco_simple_event_post_types');
+  $post_types = (get_option('panchco_simple_event_post_types')) ? get_option('panchco_simple_event_post_types') : array();
   
-  if( ! $post_types || !is_array($post_types)) {
-    $post_types = array();
+
+  
+  foreach($site_post_types as $slug) {
+    
+    $obj = get_post_type_object($slug);
+    
+    if( isset( $obj->label) ) {
+      $data[$slug] = $obj->label;
+    }
+
   }
-  
+
+
 //-----------------------------------------------------------------------------
   
   /**
@@ -185,8 +196,8 @@ function panchco_simple_event_options_page() {
   <tr valign="top">
   <th scope="row"><label for="panchco_simple_event_post_types">Post Types</label><p>On which post types do you want the Simple Event date options to appear?</p></th>
   <td>
-  <?php foreach($site_post_types as $key => $type ) { ?>
-    <input type="checkbox" name="panchco_simple_event_post_types[]" value="<?php echo $key ?>"<?php if(in_array($key,$post_types)) { ?> checked="checked"<?php } ?>/> <?php echo $type;?><br>
+  <?php foreach($data as $post_type => $label ) { ?>
+    <input type="checkbox" name="panchco_simple_event_post_types[]" value="<?php echo $post_type ?>"<?php if(in_array($post_type,$post_types)) { ?> checked="checked"<?php } ?>/> <?php echo $label;?><br>
   <?php } ?>
   </td>
   </tr>
