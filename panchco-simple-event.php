@@ -4,7 +4,7 @@ Plugin Name: Simple Event
 Plugin URI: https://github.com/Panchesco/panchco-simple-event
 Description: Adds an event date time
 Author: Richard Whitmer
-Version: 1.2.0
+Version: 1.2.1
 */
 
 
