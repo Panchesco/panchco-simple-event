@@ -409,27 +409,20 @@ add_action('admin_menu', 'panchco_simple_event_register_options_page');
     * @param $post_type string
     * @return $obj
     */
-   function se_posts($config = array('post_type' => '',
-                                      'orderby' => 'start_date',
-                                      'order' => 'DESC', 
-                                      'all_day' => false,
-                                      'show_archived' => false)) {
-                       
+   function se_posts( $args = array('post_type' => '') ) {
+                 
 
       // Post Type.
-      if( ! $config['post_type'] ) {
+      if( ! $args['post_type'] ) {
         return;
-      } else {
-        $args['post_type'] = $config['post_type'];
-        unset($config['post_type']);
-      }
-      
+      } 
+            
       //  Orderby.
-      if( in_array($config['orderby'],array('start_date','end_date','archive_date'))) {
+      if( isset($args['orderby']) && in_array($args['orderby'],array('start_date','end_date','archive_date'))) {
         
         $args['orderby'] = 'meta_value';
         
-        switch($config['orderby']) {        
+        switch($args['orderby']) {        
         
         case 'end_date':
          $args['meta_key'] = 'panchco_end_date';
@@ -443,27 +436,13 @@ add_action('admin_menu', 'panchco_simple_event_register_options_page');
           $args['meta_key'] = 'panchco_event_date';
         break;
         }
-      } else {
-        $args['orderby'] = $config['orderby'];
-      }
-      
-      // Unset config[orderby] now.
-      if( isset($config['orderby']) ) {
-        unset($config['orderby']);
-      }
-      
-      
-      // Order.
-      $args['order'] = $config['order'];
-      
-      if( isset($config['order']) ) {
-        unset($config['order']);
-      }
-      
+      } 
+
+
       // Query on All Day? 
-      if( isset( $config['all_day']) && $config['all_day'] !== false) {
+      if( isset( $args['all_day']) && $args['all_day'] !== false) {
         
-        $all_day = strtolower($config['all_day']);
+        $all_day = strtolower($args['all_day']);
         $all_day = substr($all_day,0,1);
         
         $args['meta_query'][] = array('key' => 'panchco_all_day',
@@ -474,26 +453,35 @@ add_action('admin_menu', 'panchco_simple_event_register_options_page');
       }
       
       // Unset config all day now.
-      if(isset($config['all_day'])) {
-        unset($config['all_day']);
+      if(isset($args['all_day'])) {
+        unset($args['all_day']);
       }
       
       // Show archived? 
-      if( isset( $config['show_archived']) && $config['show_archived'] !== false) {
+      if( isset( $args['show_archived']) && $args['show_archived'] !== false) {
         
-        $sa = strtolower($config['show_archived']);
+        $sa = strtolower($args['show_archived']);
         $sa = substr($sa,0,1);
         
         
         if( $sa == 'n') {
         
-        $args['meta_query'][] = array('key' => 'panchco_archive_date',
+        $args['meta_query'][] = array(
+                            
+                            array('key' => 'panchco_archive_date',
                                     'value' => current_time('Y-m-d H:i'),
                                     'compare' => '>',
-                                    'type' => 'DATE');
+                                    'type' => 'DATE'),
+                            'relation' => 'OR',
+                            array('key' => 'panchco_archive_date',
+                                  'value' => '',
+                                  'compare' => '='
+                              
+                            )
+                                    );
         } elseif( $sa == 'o' ) {
           
-          $args['meta_query'][] = array('key' => 'panchco_archive_date',
+          $args['meta_query'][] =   array('key' => 'panchco_archive_date',
                                     'value' => current_time('Y-m-d H:i'),
                                     'compare' => '<',
                                     'type' => 'DATE');
@@ -501,20 +489,16 @@ add_action('admin_menu', 'panchco_simple_event_register_options_page');
 
       }
       
-      if( isset($config['show_archived']) ) {
-        unset($config['show_archived']);
+      if( isset($args['show_archived']) ) {
+        unset($args['show_archived']);
       }
       
-      // Get Posts Per Page if set.
-      if( isset( $config['posts_per_page'] ) ) {
-        $args['posts_per_page'] = $config['posts_per_page'];
-        unset($config['posts_per_page']);
-      }
       
-
-      $args = array_merge($config,$args);
+      print_r('<pre>');
+      print_r($args);
+      print_r('</pre>');
       
-
+      
       $query = new WP_Query($args);
       
       return $query;
