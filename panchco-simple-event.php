@@ -35,13 +35,13 @@ function panchco_simple_event_metabox_callback( $post ) { ?>
     <form action="" method="post">
         <?php        
         //retrieve metadata value if it exists
-        $event_date = get_post_meta( $post->ID, 'panchco_event_date', true );
+        $event_date = get_post_meta( $post->ID, 'panchco_start_date', true );
         $end_date = get_post_meta( $post->ID, 'panchco_end_date', true );
         $archive_date = get_post_meta( $post->ID, 'panchco_archive_date', true );
         $all_day = get_post_meta( $post->ID, 'panchco_all_day', true );
         ?>
         <p><?php echo __( 'Start Date & Time', 'panchco');?><br>        
-        <input class="panchco-datetimepicker" type="text" id="panchco_event_date" name="panchco_event_date" value="<?php echo esc_attr( $event_date ); ?>" /></p>
+        <input class="panchco-datetimepicker" type="text" id="panchco_start_date" name="panchco_start_date" value="<?php echo esc_attr( $event_date ); ?>" /></p>
         <p><?php echo __( 'End Date & Time', 'panchco');?><br>       
         <input class="panchco-datetimepicker" type="text" id="panchco_end_date" name="panchco_end_date" value="<?php echo esc_attr( $end_date ); ?>" /></p> 
         <p><input type="checkbox" id="panchco_all_day" name="panchco_all_day" value="y" <?php if($all_day=="y"){ ?>checked="checked"<?php } ?>/><?php echo __( 'All Day', 'panchco');?></p> 
@@ -69,9 +69,9 @@ return;
     if ( !current_user_can( 'edit_post', $post->ID ) )
     return;
      
-    if ( isset( $_POST['panchco_event_date'] ) ) {        
-        $new_event_date = ( $_POST['panchco_event_date'] );
-        update_post_meta( $post_id, 'panchco_event_date', $new_event_date );      
+    if ( isset( $_POST['panchco_start_date'] ) ) {        
+        $new_event_date = ( $_POST['panchco_start_date'] );
+        update_post_meta( $post_id, 'panchco_start_date', $new_event_date );      
     }
     
     if ( isset( $_POST['panchco_end_date'] ) ) {        
@@ -228,7 +228,7 @@ add_action('admin_menu', 'panchco_simple_event_register_options_page');
         $format = get_option('date_format') . " " . get_option('time_format');
       }
       
-      $val = get_post_meta($post_id,'panchco_event_date', true);
+      $val = get_post_meta($post_id,'panchco_start_date', true);
       
       if( $val ) {
         echo date($format,strtotime($val));
@@ -333,7 +333,7 @@ add_action('admin_menu', 'panchco_simple_event_register_options_page');
         $format = get_option('date_format') . " " . get_option('time_format');
       }
       
-      $val = get_post_meta($post_id,'panchco_event_date', true);
+      $val = get_post_meta($post_id,'panchco_start_date', true);
       
       if( $val ) {
         return date($format,strtotime($val));
@@ -455,7 +455,7 @@ add_action('admin_menu', 'panchco_simple_event_register_options_page');
         break;
         
         default:
-          $args['meta_key'] = 'panchco_event_date';
+          $args['meta_key'] = 'panchco_start_date';
         break;
         }
       } 
