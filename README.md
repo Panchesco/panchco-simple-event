@@ -21,7 +21,7 @@ Display the event start date & time value.
 | Parameter | Required? |	Description | Default | Options |
 | --- | --- | --- | --- | --- |
 | ```$post_id``` | Yes |	Post ID | None |  |
-| ```$format``` | No |	PHP date format string | l, F j, Y |  See [PHP docs for date strings](http://php.net/manual/en/function.date.php) |
+| ```$format``` | No |	PHP date format string | See notes below |  See [PHP docs for date strings](http://php.net/manual/en/function.date.php) |
 
 
 
@@ -34,7 +34,7 @@ Display the event end date & time value.
 | Parameter | Required? |	Description | Default | Options |
 | --- | --- | --- | --- | --- |
 | ```$post_id``` | Yes |	Post ID | None |  |
-| ```$format``` | No |	PHP date format string | l, F j, Y |  See [PHP docs for date strings](http://php.net/manual/en/function.date.php) |
+| ```$format``` | No |	PHP date format string | See notes below |  See [PHP docs for date strings](http://php.net/manual/en/function.date.php) |
 
 
 ### ```se_event_archive($post_id, $format)```
@@ -46,7 +46,7 @@ Display the event archive date & time value.
 | Parameter | Required? |	Description | Default | Options |
 | --- | --- | --- | --- | --- |
 | ```$post_id``` | Yes |	Post ID | None |  |
-| ```$format``` | No |	PHP date format string | l, F j, Y |  See [PHP docs for date strings](http://php.net/manual/en/function.date.php) |
+| ```$format``` | No |	PHP date format string | See notes below |  See [PHP docs for date strings](http://php.net/manual/en/function.date.php) |
 
 ### ```se_all_day($post_id)```
 
@@ -68,7 +68,7 @@ Returns the event start date & time value. Returns false if no value exists.
 | Parameter | Required? |	Description | Default | Options |
 | --- | --- | --- | --- | --- |
 | ```$post_id``` | Yes |	Post ID | None |  |
-| ```$format``` | No |	PHP date format string | l, F j, Y |  See [PHP docs for date strings](http://php.net/manual/en/function.date.php) |
+| ```$format``` | No |	PHP date format string | See notes below |  See [PHP docs for date strings](http://php.net/manual/en/function.date.php) |
 
 
 ### ```get_se_event_end($post_id, $format)```
@@ -80,7 +80,7 @@ Returns the event end date & time value. Returns false if no value exists.
 | Parameter | Required? |	Description | Default | Options |
 | --- | --- | --- | --- | --- |
 | ```$post_id``` | Yes |	Post ID | None |  |
-| ```$format``` | No |	PHP date format string | l, F j, Y |  See [PHP docs for date strings](http://php.net/manual/en/function.date.php) |
+| ```$format``` | No |	PHP date format string | See notes below |  See [PHP docs for date strings](http://php.net/manual/en/function.date.php) |
 
 
 ### ```get_se_event_archive($post_id, $format)```
@@ -92,7 +92,7 @@ Returns the event end archive & time value. Returns false if no value exists.
 | Parameter | Required? |	Description | Default | Options |
 | --- | --- | --- | --- | --- |
 | ```$post_id``` | Yes |	Post ID | None |  |
-| ```$format``` | No |	PHP date format string | l, F j, Y |  See [PHP docs for date strings](http://php.net/manual/en/function.date.php) |
+| ```$format``` | No |	PHP date format string | See notes below |  See [PHP docs for date strings](http://php.net/manual/en/function.date.php) |
 
 ### ```get_se_all_day($post_id)```
 
@@ -185,6 +185,25 @@ $query = se_posts($args);
 
 
 ```
+
+## Option Names & Types for Custom Queries
+
+
+| Option Name | Description | Type |
+| --- | --- | --- |
+|
+| ```panchco_start_date``` | Saved event start date | DATETIME |
+| ```panchco_end_date``` | Saved event end date | DATETIME |
+| ```panchco_archive_date```| Saved archive date | DATETIME |
+| ```panchco_all_day``` | Saved all day checkbox value | CHAR |
+
+## Notes
+
+* Date Format string defaults to current WP installation date format as in Settings > General
+* Time Format strings defaults to current WP installation time format as in Settings > General
+
+
+
 
 
 
