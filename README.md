@@ -118,6 +118,71 @@ In addition to parameters available in the [WP_Query()](https://codex.wordpress.
 | ```all_day``` | No |	Include all day events in results? | Yes | Yes, No, Only |
 | ```show_archived``` | No |	Include events whose archive date has passed in results? | Yes | Yes, No |
 
+## Examples
+
+### Events Happening Today
+
+Create an se_posts() query with information about events happening now.
+
+```
+<?php 
+  
+  
+  // Create an array of arguments with parameters for this plugin.
+  
+  $args = array();
+  $args['post_type'] = array('post_type');
+  $args['orderby'] = 'start_date';
+  $args['show_archived'] = 'no';
+  
+  
+  // Add some WP_Query() arguments
+  
+  $args['order'] = 'DESC';
+  $args['category_name'] = 'category-slug';
+  
+  
+  // Use WP current_time() function to set current time as Y-m-d H:i
+     
+  $now = current_time('Y-m-d H:i');
+
+
+  // Add a date range as you would with a call to WP_Query().
+  
+  $args['meta_query'][] = array(
+                              array('key' => 'panchco_start_date',
+                                    'value' => $now,
+                                    'compare' => '<=',
+                                    'type' => 'DATETIME'),
+                              'relation' => 'AND',   
+                              array('key' => 'panchco_end_date',
+                                    'value' => $now,
+                                    'compare' => '>=',
+                                    'type' => 'DATETIME')
+                                    
+                            );
+                                               
+
+// Pass the args to se_posts() function as you would a WP_Query() and use the query in a WP loop.
+
+$query = se_posts($args);
+
+?>
+
+<?php if( $query->have_posts() ) : while( $query->have_posts() ) : $query->the_post(); ?>
+
+<article>
+  <time datetime="<?php se_event_start(get_the_id(),'c');?>"><?php se_event_start(get_the_id());?></time>
+  <h1><?php the_title() ;?></h1>
+  <?php the_content() ;?>
+  <p>Published on: <?php the_date();?></p>
+</article>
+
+<?php endwhile; endif; ?>
+
+
+```
+
 
 
 
