@@ -1,6 +1,6 @@
 # Simple Event
 
-A WordPress Plugin for assigning date & time values to post types.
+A WordPress Plugin assigning and event start date, end date, and archive information to any post type.
 
 ## Installation
 
