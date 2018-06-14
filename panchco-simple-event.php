@@ -467,24 +467,28 @@ add_action('admin_menu', 'panchco_simple_event_register_options_page');
         if( $sa == 'n') {
         
         $args['meta_query'][] = array(
-                            
-                            array('key' => 'panchco_archive_date',
+                                  array('key' => 'panchco_archive_date',
                                     'value' => current_time('Y-m-d H:i'),
                                     'compare' => '>',
                                     'type' => 'DATE'),
-                            'relation' => 'OR',
-                            array('key' => 'panchco_archive_date',
-                                  'value' => '',
-                                  'compare' => '='
-                              
-                            )
-                                    );
+                                  'relation' => 'OR',
+                                  array('key' => 'panchco_archive_date',
+                                    'value' => '',
+                                    'compare' => '=')
+                                    
+                                );
         } elseif( $sa == 'o' ) {
           
-          $args['meta_query'][] =   array('key' => 'panchco_archive_date',
-                                    'value' => current_time('Y-m-d H:i'),
-                                    'compare' => '<',
-                                    'type' => 'DATE');
+          $args['meta_query'][] =   array(
+                                      array('key' => 'panchco_archive_date',
+                                            'value' => current_time('Y-m-d H:i'),
+                                            'compare' => '<',
+                                            'type' => 'DATE'),
+                                        'relation' => 'AND',
+                                      array('key' => 'panchco_archive_date',
+                                            'value' => '',
+                                            'compare' => '!=')
+                                            );
         }
 
       }
@@ -492,6 +496,7 @@ add_action('admin_menu', 'panchco_simple_event_register_options_page');
       if( isset($args['show_archived']) ) {
         unset($args['show_archived']);
       }
+      
       
       $query = new WP_Query($args);
       
