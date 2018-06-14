@@ -460,9 +460,9 @@ add_action('admin_menu', 'panchco_simple_event_register_options_page');
   if( ! function_exists('se_posts') ){
     
   /**
-    * Return event all day value.
-    * @param $post_type string
-    * @return $obj
+    * Return event WP object for use in template loop..
+    * @param $args array
+    * @return obj
     */
    function se_posts( $args = array('post_type' => '') ) {
                  
@@ -553,10 +553,7 @@ add_action('admin_menu', 'panchco_simple_event_register_options_page');
       wp_reset_query();
       
       return $query;
-     
    }
-   
-   
  }
  
  //-----------------------------------------------------------------------------
@@ -564,12 +561,16 @@ add_action('admin_menu', 'panchco_simple_event_register_options_page');
  
  if( ! function_exists('se_date_format') ) {
    
+   /**
+    * Return the current WP date and time format settings.
+    * @return str
+    */
    function se_date_format() {
      return get_option('date_format') . " " . get_option('time_format');
    }
-   
-   
  }
+ 
+ // End panchco-simple-event.php
 
 
 
