@@ -170,14 +170,17 @@ $query = se_posts($args);
 ?>
 
 <?php if( $query->have_posts() ) : while( $query->have_posts() ) : $query->the_post(); ?>
-
 <article>
-  <time datetime="<?php se_event_start(get_the_id(),'c');?>"><?php se_event_start(get_the_id());?></time>
+<?php if( get_se_all_day( get_the_id() ) == "Yes") { ?>
+<?php se_event_start(get_the_id(), 'l, F j, Y');?> &ndash; <?php se_event_end(get_the_id(), 'l, F j, Y');?>
+<?php } else { ?> 
+<time datetime="<?php se_event_start(get_the_id(),'c');?>"><?php se_event_start(get_the_id());?></time>
+<?php } ?>
   <h1><?php the_title() ;?></h1>
   <?php the_content() ;?>
   <p>Published on: <?php the_date();?></p>
 </article>
-
+<hr>
 <?php endwhile; endif; ?>
 
 
