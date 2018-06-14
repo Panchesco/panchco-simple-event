@@ -105,7 +105,7 @@ Returns Yes or No if the event is All day or not.
 | ```$post_id``` | Yes |	Post ID | None |  |
 
 
-### ```se_posts($config)```
+### ```se_posts( $args )```
 
 Returns the results of a WP_Query() instance queried against saved Simple Event date & time values.
 In addition to parameters available in the [WP_Query()](https://codex.wordpress.org/Class_Reference/WP_Query#Parameters), the following parameters are available:
@@ -198,8 +198,8 @@ $query = se_posts($args);
 
 ## Notes
 
-* Date Format string defaults to current WP installation date format as in Settings > General
-* Time Format strings defaults to current WP installation time format as in Settings > General
+* Date Format string defaults to current WP installation in Settings > General.
+* Time Format strings defaults to current WP installation in Settings > General.
 
 
 

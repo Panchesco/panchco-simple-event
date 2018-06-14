@@ -1,11 +1,25 @@
 <?php
-/*
-Plugin Name: Simple Event
-Plugin URI: https://github.com/Panchesco/panchco-simple-event
-Description: Adds an event date time
-Author: Richard Whitmer
-Version: 1.2.1
+/**
+ * Panchco Simple Event.
+ *
+ *
+ * @package panchco_simple_event
+ * @author Richard Whitmer
+ * @since 1.0.0
 */
+
+/**
+Plugin Name: Panchco Simple Event
+Plugin URI: https://github.com/Panchesco/panchco-simple-event
+Description: Add date, time, duration, and archive information to any post type.
+Author: Richard Whitmer
+Version: 1.2.2
+*/
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
  function panchco_simple_event_metabox() {
   
