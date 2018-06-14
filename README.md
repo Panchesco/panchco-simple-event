@@ -1,4 +1,4 @@
-# Simple Event
+# Panchco Simple Event
 
 A WordPress Plugin for assigning and event start date, end date, and archive information to any post type.
 
