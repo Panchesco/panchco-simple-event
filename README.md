@@ -1,6 +1,6 @@
 # Simple Event
 
-A WordPress Plugin assigning and event start date, end date, and archive information to any post type.
+A WordPress Plugin for assigning and event start date, end date, and archive information to any post type.
 
 ## Installation
 
@@ -182,7 +182,6 @@ $query = se_posts($args);
 </article>
 <hr>
 <?php endwhile; endif; ?>
-
 
 ```
 
