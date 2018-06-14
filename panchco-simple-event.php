@@ -168,8 +168,6 @@ function panchco_simple_event_options_page() {
   
   $post_types = (get_option('panchco_simple_event_post_types')) ? get_option('panchco_simple_event_post_types') : array();
   
-
-  
   foreach($site_post_types as $slug) {
     
     $obj = get_post_type_object($slug);
@@ -224,8 +222,12 @@ add_action('admin_menu', 'panchco_simple_event_register_options_page');
     * @param $format string PHP date format string.
     * @return mixed
     */
-   function se_event_start($post_id, $format='l, F j, Y') {
+   function se_event_start($post_id, $format = '') {
      
+      if( ! $format ) {
+        $format = get_option('date_format') . " " . get_option('time_format');
+      }
+      
       $val = get_post_meta($post_id,'panchco_event_date', true);
       
       if( $val ) {
@@ -247,7 +249,11 @@ add_action('admin_menu', 'panchco_simple_event_register_options_page');
     * @param $format string PHP date format string.
     * @return mixed
     */
-   function se_event_end($post_id, $format='l, F j, Y') {
+   function se_event_end($post_id, $format = '' ) {
+     
+      if( ! $format ) {
+        $format = get_option('date_format') . " " . get_option('time_format');
+      }
      
       $val = get_post_meta($post_id,'panchco_end_date', true);
       
@@ -270,8 +276,12 @@ add_action('admin_menu', 'panchco_simple_event_register_options_page');
     * @param $format string PHP date format string.
     * @return mixed
     */
-   function se_event_archive($post_id, $format='l, F j, Y') {
+   function se_event_archive( $post_id, $format = '' ) {
      
+      if( ! $format ) {
+        $format = get_option('date_format') . " " . get_option('time_format');
+      }
+      
       $val = get_post_meta($post_id,'panchco_archive_date', true);
       
       if( $val ) {
@@ -317,8 +327,12 @@ add_action('admin_menu', 'panchco_simple_event_register_options_page');
     * @param $format string PHP date format string.
     * @return mixed
     */
-   function get_se_event_start($post_id, $format='l, F j, Y') {
+   function get_se_event_start( $post_id, $format = '' ) {
      
+      if( ! $format ) {
+        $format = get_option('date_format') . " " . get_option('time_format');
+      }
+      
       $val = get_post_meta($post_id,'panchco_event_date', true);
       
       if( $val ) {
@@ -340,8 +354,12 @@ add_action('admin_menu', 'panchco_simple_event_register_options_page');
     * @param $format string PHP date format string.
     * @return mixed
     */
-   function get_se_event_end($post_id, $format='l, F j, Y') {
+   function get_se_event_end( $post_id, $format = '' ) {
      
+      if( ! $format ) {
+        $format = get_option('date_format') . " " . get_option('time_format');
+      }
+      
       $val = get_post_meta($post_id,'panchco_end_date', true);
       
       if( $val ) {
@@ -363,8 +381,12 @@ add_action('admin_menu', 'panchco_simple_event_register_options_page');
     * @param $format string PHP date format string.
     * @return mixed
     */
-   function get_se_event_archive($post_id, $format='l, F j, Y') {
+   function get_se_event_archive($post_id, $format = '' ) {
      
+      if( ! $format ) {
+        $format = get_option('date_format') . " " . get_option('time_format');
+      }
+      
       $val = get_post_meta($post_id,'panchco_archive_date', true);
       
       if( $val ) {
@@ -500,6 +522,8 @@ add_action('admin_menu', 'panchco_simple_event_register_options_page');
       
       $query = new WP_Query($args);
       
+      wp_reset_query();
+      
       return $query;
      
    }
@@ -508,6 +532,16 @@ add_action('admin_menu', 'panchco_simple_event_register_options_page');
  }
  
  //-----------------------------------------------------------------------------
+ 
+ 
+ if( ! function_exists('se_date_format') ) {
+   
+   function se_date_format() {
+     return get_option('date_format') . " " . get_option('time_format');
+   }
+   
+   
+ }
 
 
 
