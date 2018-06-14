@@ -488,30 +488,25 @@ add_action('admin_menu', 'panchco_simple_event_register_options_page');
         
         if( $sa == 'n') {
         
-        $args['meta_query'][] = array(
+            $args['meta_query'][] = array(
                                   array('key' => 'panchco_archive_date',
                                     'value' => current_time('Y-m-d H:i'),
                                     'compare' => '>',
-                                    'type' => 'DATE'),
+                                    'type' => 'DATETIME'),
                                   'relation' => 'OR',
                                   array('key' => 'panchco_archive_date',
                                     'value' => '',
                                     'compare' => '=')
                                     
                                 );
+        
         } elseif( $sa == 'o' ) {
           
-          $args['meta_query'][] =   array(
-                                      array('key' => 'panchco_archive_date',
+            $args['meta_query'][] =   array('key' => 'panchco_archive_date',
                                             'value' => current_time('Y-m-d H:i'),
-                                            'compare' => '<',
-                                            'type' => 'DATE'),
-                                        'relation' => 'AND',
-                                      array('key' => 'panchco_archive_date',
-                                            'value' => '',
-                                            'compare' => '!=')
-                                            );
-        }
+                                            'compare' => '<=',
+                                            'type' => 'DATETIME');       
+                                            }
 
       }
       
