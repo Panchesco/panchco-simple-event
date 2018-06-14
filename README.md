@@ -118,11 +118,9 @@ In addition to parameters available in the [WP_Query()](https://codex.wordpress.
 | ```all_day``` | No |	Include all day events in results? | Yes | Yes, No, Only |
 | ```show_archived``` | No |	Include events whose archive date has passed in results? | Yes | Yes, No |
 
-## Examples
+## Example
 
-### Events Happening Today
-
-Create an se_posts() query with information about events happening now.
+Using se_posts() function with the loop to display all events that are happening today. Do not show events whose archive date has passed.
 
 ```
 <?php 
