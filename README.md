@@ -191,7 +191,6 @@ $query = se_posts($args);
 
 | Option Name | Description | Type |
 | --- | --- | --- |
-|
 | ```panchco_start_date``` | Saved event start date | DATETIME |
 | ```panchco_end_date``` | Saved event end date | DATETIME |
 | ```panchco_archive_date```| Saved archive date | DATETIME |
