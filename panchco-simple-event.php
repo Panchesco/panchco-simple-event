@@ -60,6 +60,20 @@ add_action( 'add_meta_boxes', 'panchco_simple_event_metabox' );
 
 //-----------------------------------------------------------------------------
 
+
+/**
+ * Redirect to settings page on activation.
+ */
+function panchco_se_activation_redirect( $plugin ) {
+    if( $plugin == plugin_basename( __FILE__ ) ) {
+        exit( wp_redirect( admin_url( 'options-general.php?page=panchco_simple_event' ) ) );
+    }
+}
+
+add_action( 'activated_plugin', 'panchco_se_activation_redirect' );
+
+//-----------------------------------------------------------------------------
+
 /**
  * Display the metabox.
  */
